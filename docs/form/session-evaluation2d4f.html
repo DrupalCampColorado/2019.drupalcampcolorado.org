@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+  
+<!-- Mirrored from 2019.drupalcampcolorado.org/form/session-evaluation?source_entity_type=node&source_entity_id=48 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2019 13:29:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+<meta name="title" content="Understanding Drupal&#039;s Cache API: Fine Tuning and Lightning Speed: Session Evaluation | DrupalCamp Colorado 2019" />
+<meta name="Generator" content="Drupal 8 (https://www.drupal.org)" />
+<meta name="MobileOptimized" content="width" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="https://2019.drupalcampcolorado.org/core/misc/favicon.ico" type="image/vnd.microsoft.icon" />
+<script src="../sites/default/files/google_tag/google_tag.script2371.js?pvvcvz"></script>
+
+    <title>Understanding Drupal&#039;s Cache API: Fine Tuning and Lightning Speed: Session Evaluation | DrupalCamp Colorado 2019</title>
+    <link rel="stylesheet" media="all" href="../sites/default/files/css/css_06690k8U-NE35MdigH28Dbb9KZQSKksdxH-GlxxC6I42371.css?pvvcvz" />
+<link rel="stylesheet" media="all" href="http://cdn.jsdelivr.net/gh/gjunge/rateit.js@1.1.2/scripts/rateit.css" />
+<link rel="stylesheet" media="all" href="../sites/default/files/css/css_6wmfE0NflTA7U_nnMO_4KeFJUXHaQR-_LanFfQGU5CU2371.css?pvvcvz" />
+<link rel="stylesheet" media="all" href="../sites/default/files/css/css_NLHZoRapDAHi0GKm3q8pJ68odGEsSX7SM4dYYPhE-NA2371.css?pvvcvz" />
+<link rel="stylesheet" media="all" href="http://fonts.googleapis.com/css?family=Arvo:400,700|Fira+Sans:400,400i,700,700i" />
+
+    
+<!--[if lte IE 8]>
+<script src="/sites/default/files/js/js_VtafjXmRvoUgAzqzYTA3Wrjkx9wcWhjP0G4ZnnqRamA.js"></script>
+<![endif]-->
+<script src="../sites/default/files/js/js_fY3t4dzy_8yzlilF4iNz_7ao9UaVneBNyJTK-0aE7OU.js"></script>
+
+    <meta name="theme-color" content="#8eabc3">
+  </head>
+  <body class="path-webform session-evaluationsource-entity-typenodesource-entity-id48">
+        <div id="skip-to-content">
+      <a href="#main-content" class="skip-to-content-link">Skip to main content</a>
+    </div>
+    <noscript aria-hidden="true"><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MDJ5G83" height="0" width="0" title="Google Tag Manager"></iframe></noscript>
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
+    
+<div class="layout-container">
+
+              <div class="region region-utility">
+    <div class="inner-container">
+      <nav role="navigation" aria-labelledby="block-utilitynavigation-menu" id="block-utilitynavigation" class="block block-menu navigation menu--utility-navigation">
+            
+  <h3 class="visually-hidden" id="block-utilitynavigation-menu" class="block-title">Utility navigation</h3>
+  
+
+        
+              <ul class="menu">
+                    <li class="menu-item">
+        <a href="../code-conduct.html" data-drupal-link-system-path="node/7">Code of Conduct</a>
+              </li>
+                <li class="menu-item">
+        <a href="../user/login.html" data-drupal-link-system-path="user/login">Log in</a>
+              </li>
+        </ul>
+  
+
+
+  </nav>
+<div id="block-cart" class="block block-commerce-cart block-cart">
+  
+    
+      <div class="cart--cart-block">
+  <div class="cart-block--summary">
+    <a class="cart-block--link__expand" href="../cart.html">
+      <span class="cart-block--summary__icon"><img src="../themes/custom/themekit/images/svg/cart.svg" alt="Shopping cart" typeof="foaf:Image" />
+</span>
+      <span class="cart-block--summary__count">0 items</span>
+    </a>
+  </div>
+  </div>
+
+  </div>
+
+    </div>
+  </div>
+
+    
+            <header role="banner">
+              <div class="region region-header">
+    <div id="block-themekit-branding" class="block block-system block-system-branding-block block-themekit-branding">
+  
+    
+        <a href="../index.html" title="Home" rel="home" class="site-logo">
+      <img src="../themes/custom/themekit/logo.svg" alt="Home" />
+    </a>
+      </div>
+<button class="menu-toggle" type="button" aria-controls="menu--main" aria-expands="false">Menu Toggle</button>
+<nav role="navigation" aria-labelledby="block-themekit-main-menu-menu" id="block-themekit-main-menu" class="block block-menu navigation menu--main">
+            
+  <h2 class="visually-hidden" id="block-themekit-main-menu-menu">Main navigation</h2>
+  
+
+        
+              <ul class="horizontal menu menu--main" data-responsive-menu="accordion marge-dropdown" data-submenu-toggle="true">
+                    <li class="menu-item">
+        <a href="../schedule.html" data-drupal-link-system-path="node/37">Schedule</a>
+              </li>
+                <li class="menu-item">
+        <a href="../sponsor.html" data-drupal-link-system-path="node/4">Sponsor</a>
+              </li>
+                <li class="menu-item menu-item--expanded">
+        <a href="../trainings.html" data-drupal-link-system-path="node/5">Trainings</a>
+                                <ul class="menu">
+                    <li class="menu-item">
+        <a href="../training/accessible-websites-made-easy.html" title="Training: Accessible Websites Made Easy - How To Assess Issues and Create Better Experiences" data-drupal-link-system-path="node/49">Accessible Websites Made Easy</a>
+              </li>
+                <li class="menu-item">
+        <a href="../training/training-component-based-development-training-workshop.html" title="Training: Component-based Development Workshop" data-drupal-link-system-path="node/23">Component-based Development Workshop</a>
+              </li>
+        </ul>
+  
+              </li>
+                <li class="menu-item menu-item--expanded">
+        <a href="../summits.html" data-drupal-link-system-path="node/6">Summits</a>
+                                <ul class="menu">
+                    <li class="menu-item">
+        <a href="../nonprofit-government-summit.html" title="Summit: Nonprofit &amp; Government Summit" data-drupal-link-system-path="node/12">Nonprofit &amp; Government Summit</a>
+              </li>
+                <li class="menu-item">
+        <a href="../higher-ed-summit.html" title="Summit:  Higher Ed Summit" data-drupal-link-system-path="node/13">Higher Ed Summit</a>
+              </li>
+                <li class="menu-item">
+        <a href="../library-summit.html" title="Summit:  Library Summit" data-drupal-link-system-path="node/9">Library Summit</a>
+              </li>
+        </ul>
+  
+              </li>
+                <li class="menu-item">
+        <a href="../contribution-day.html" data-drupal-link-system-path="node/44">Contrib Day</a>
+              </li>
+        </ul>
+  
+
+
+  </nav>
+
+  </div>
+
+        </header>
+    
+    
+    
+
+    
+
+    
+    
+
+    <main id="main-content" role="main" class="pb">
+        
+        <div class="layout-content">
+              <div class="region region-content">
+    <div data-drupal-messages-fallback class="hidden"></div>
+<div id="block-themekit-content" class="block block-system block-system-main-block block-themekit-content">
+  
+    
+      <form class="webform-submission-form webform-submission-add-form webform-submission-session-evaluation-form webform-submission-session-evaluation-add-form webform-submission-session-evaluation-node-48-form webform-submission-session-evaluation-node-48-add-form js-webform-details-toggle webform-details-toggle" data-drupal-selector="webform-submission-session-evaluation-node-48-add-form" action="https://2019.drupalcampcolorado.org/form/session-evaluation?source_entity_type=node&amp;source_entity_id=48" method="post" id="webform-submission-session-evaluation-node-48-add-form" accept-charset="UTF-8">
+  
+  <div class="js-form-item form-item js-form-type-webform-rating form-type-webform-rating js-form-item-mastery form-item-mastery">
+      <label for="edit-mastery" class="js-form-required form-required">Please rate the speaker's mastery of this topic.</label>
+        <input data-drupal-selector="edit-mastery" type="range" id="edit-mastery" name="mastery" value="0" step="1" min="0" max="5" class="form-webform-rating required" required="required" aria-required="true" /><div class="rateit svg rateit-medium" data-rateit-min="0" data-rateit-max="5" data-rateit-step="1" data-rateit-resetable="false" data-rateit-readonly="false" data-rateit-backingfld="[data-drupal-selector=&quot;edit-mastery&quot;]" data-rateit-value="" data-rateit-starheight="24" data-rateit-starwidth="24"></div>
+
+
+        </div>
+<div class="js-form-item form-item js-form-type-webform-rating form-type-webform-rating js-form-item-presentation form-item-presentation">
+      <label for="edit-presentation" class="js-form-required form-required">Please rate the speaker's presentation skills.</label>
+        <input data-drupal-selector="edit-presentation" type="range" id="edit-presentation" name="presentation" value="0" step="1" min="0" max="5" class="form-webform-rating required" required="required" aria-required="true" /><div class="rateit svg rateit-medium" data-rateit-min="0" data-rateit-max="5" data-rateit-step="1" data-rateit-resetable="false" data-rateit-readonly="false" data-rateit-backingfld="[data-drupal-selector=&quot;edit-presentation&quot;]" data-rateit-value="" data-rateit-starheight="24" data-rateit-starwidth="24"></div>
+
+
+        </div>
+<div class="js-form-item form-item js-form-type-webform-rating form-type-webform-rating js-form-item-visual-aids form-item-visual-aids">
+      <label for="edit-visual-aids" class="js-form-required form-required">Please rate the quality of speaker's slides and visual aids.</label>
+        <input data-drupal-selector="edit-visual-aids" type="range" id="edit-visual-aids" name="visual_aids" value="0" step="1" min="0" max="5" class="form-webform-rating required" required="required" aria-required="true" /><div class="rateit svg rateit-medium" data-rateit-min="0" data-rateit-max="5" data-rateit-step="1" data-rateit-resetable="false" data-rateit-readonly="false" data-rateit-backingfld="[data-drupal-selector=&quot;edit-visual-aids&quot;]" data-rateit-value="" data-rateit-starheight="24" data-rateit-starwidth="24"></div>
+
+
+        </div>
+<div class="webform-element--title-inline js-form-item form-item js-form-type-checkbox form-type-checkbox js-form-item-learning form-item-learning">
+        <input data-drupal-selector="edit-learning" type="checkbox" id="edit-learning" name="learning" value="1" class="form-checkbox" />
+
+        <label for="edit-learning" class="option">Did you learn something at this session?</label>
+      </div>
+<div class="js-form-item form-item js-form-type-textarea form-type-textarea js-form-item-comments form-item-comments">
+      <label for="edit-comments">Comments</label>
+        <div class="form-textarea-wrapper">
+  <textarea data-drupal-selector="edit-comments" id="edit-comments" name="comments" rows="5" cols="60" class="form-textarea resize-vertical"></textarea>
+</div>
+
+        </div>
+<input autocomplete="off" data-drupal-selector="form-gfrtl8xsjclokewwfi-liq-omggi9rxfywzzvrwdwyg" type="hidden" name="form_build_id" value="form-gFrTl8xsjCLOkEWwfI-liq-OmGgi9rxfYwzzVrWdWYg" />
+<input data-drupal-selector="edit-webform-submission-session-evaluation-node-48-add-form" type="hidden" name="form_id" value="webform_submission_session_evaluation_node_48_add_form" />
+<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions"><input class="webform-button--submit button button--primary js-form-submit form-submit" data-drupal-selector="edit-submit" type="submit" id="edit-submit" name="op" value="Submit" />
+
+</div>
+
+
+  
+</form>
+
+  </div>
+
+  </div>
+
+        </div>
+        
+            </main>
+
+    <footer id="main-footer" role="contentinfo">
+        <div class="container">
+                            <div class="footer--top">
+                      <div class="region region-footer-top">
+    <div class="mailchimp-signup-subscribe-form block block-mailchimp-signup block-mailchimp-signup-subscribe-blocknewsletter-signup block-mailchimpsubscriptionformnewslettersignup-2" data-drupal-selector="mailchimp-signup-subscribe-block-newsletter-signup-form" id="block-mailchimpsubscriptionformnewslettersignup-2">
+  
+      <h3 class="block-title">Sign Up for DrupalCamp Colorado 2019 Updates</h3>
+    
+      <form action="https://2019.drupalcampcolorado.org/form/session-evaluation?source_entity_type=node&amp;source_entity_id=48" method="post" id="mailchimp-signup-subscribe-block-newsletter-signup-form" accept-charset="UTF-8">
+  <div id="mailchimp-newsletter-257a90f215-mergefields" class="mailchimp-newsletter-mergefields"><div class="js-form-item form-item js-form-type-email form-type-email js-form-item-mergevars-email form-item-mergevars-email">
+      <label for="edit-mergevars-email" class="js-form-required form-required">Email Address</label>
+        <input data-drupal-selector="edit-mergevars-email" type="email" id="edit-mergevars-email" name="mergevars[EMAIL]" value="" size="25" maxlength="254" class="form-email required" required="required" aria-required="true" />
+
+        </div>
+</div><input autocomplete="off" data-drupal-selector="form-pcwqwtg0ximdmep3forypq4ogconsy3r9kbknfeolnq" type="hidden" name="form_build_id" value="form-PcWQwtg0xIMdmEP3FORyPQ4ogcONSy3r9KBkNFEolNQ" />
+<input data-drupal-selector="edit-mailchimp-signup-subscribe-block-newsletter-signup-form" type="hidden" name="form_id" value="mailchimp_signup_subscribe_block_newsletter_signup_form" />
+<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper" id="edit-actions"><input data-drupal-selector="edit-submit" type="submit" id="edit-submit" name="op" value="Subscribe" class="button js-form-submit form-submit" />
+</div>
+<div class="url-textfield js-form-wrapper form-wrapper" style="display: none !important;"><input autocomplete="off" data-drupal-selector="edit-url" type="text" id="edit-url" name="url" value="" size="20" maxlength="128" class="form-text" />
+</div>
+
+</form>
+
+  </div>
+
+  </div>
+
+                </div>
+            
+                            <div class="footer--left">
+                      <div class="region region-footer-left">
+    <div id="block-poweredby" class="block block-block-content block-block-contenta47a40c4-6098-440a-b1d1-ab65198cc3a6 block-poweredby">
+  
+    
+      
+            <div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item"><p>Powered by Drupal on Pantheon</p></div>
+      
+  </div>
+
+  </div>
+
+                </div>
+
+                <div class="footer--right">
+                      <div class="region region-footer-right">
+    <div id="block-followus" class="block block-block-content block-block-contentc01c0e78-42d3-4f86-afde-ba5f9c0d1d59 block-followus">
+  
+      <h3 class="block-title">Follow Us</h3>
+    
+      
+      <div class="field field--name-field-p-social field--type-entity-reference-revisions field--label-hidden field__items">
+              <div class="field__item"><a href="https://www.facebook.com/drupalcolorado" target="_blank">
+    <svg viewBox="0 0 512 512" class="icon--facebook" xmlns="http://www.w3.org/2000/svg"><path d="M297.277 508.668zm0 0M302.398 507.793c-1.02.187-2.039.36-3.058.535 1.02-.176 2.039-.348 3.058-.535zm0 0M285.137 510.34zm0 0M290.055 509.738zm0 0M309.367 506.41zm0 0M326.664 502.113c-.726.207-1.453.403-2.18.606.727-.203 1.454-.399 2.18-.606zm0 0M321.434 503.543c-.79.207-1.582.418-2.375.617.793-.2 1.586-.406 2.375-.617zm0 0M314.59 505.254c-.836.195-1.68.379-2.524.566.844-.187 1.688-.37 2.524-.566zm0 0M277.527 511.09zm0 0M512 256C512 114.637 397.363 0 256 0S0 114.637 0 256s114.637 256 256 256c1.504 0 3-.031 4.5-.059V312.656h-55V248.56h55V201.39c0-54.703 33.395-84.477 82.191-84.477 23.368 0 43.454 1.742 49.309 2.52v57.171h-33.648c-26.547 0-31.688 12.618-31.688 31.13v40.824h63.477l-8.274 64.097h-55.203V502.11C433.668 471.434 512 372.852 512 256zm0 0M272.914 511.43zm0 0M264.754 511.836zm0 0"/></svg>
+</a></div>
+              <div class="field__item"><a href="https://www.twitter.com/drupalcolorado" target="_blank">
+    <svg viewBox="0 0 512 512" class="icon--twitter" xmlns="http://www.w3.org/2000/svg"><path d="M256 0C114.637 0 0 114.637 0 256s114.637 256 256 256 256-114.637 256-256S397.363 0 256 0zm116.887 199.602c.113 2.52.168 5.05.168 7.593 0 77.645-59.102 167.18-167.184 167.184h.004-.004c-33.184 0-64.062-9.727-90.066-26.395 4.597.543 9.277.813 14.015.813 27.532 0 52.868-9.39 72.98-25.152-25.722-.477-47.41-17.465-54.894-40.813a58.481 58.481 0 0 0 11.043 1.063c5.363 0 10.559-.723 15.496-2.07-26.886-5.384-47.14-29.145-47.14-57.598 0-.266 0-.504.007-.75a58.354 58.354 0 0 0 26.614 7.347c-15.778-10.527-26.149-28.523-26.149-48.91a58.597 58.597 0 0 1 7.957-29.535c28.977 35.555 72.282 58.937 121.118 61.394a58.708 58.708 0 0 1-1.528-13.398c0-32.437 26.317-58.754 58.766-58.754 16.902 0 32.168 7.145 42.89 18.567a117.855 117.855 0 0 0 37.313-14.262c-4.395 13.715-13.707 25.222-25.84 32.5 11.887-1.422 23.215-4.574 33.742-9.254a119.412 119.412 0 0 1-29.308 30.43zm0 0"/></svg>
+  </a></div>
+              <div class="field__item"><a href="https://www.youtube.com/channel/UC5fe3MR2yjHAd1t7qrjUa9A" target="blank">
+  <svg viewBox="0 0 512 512" class="icon--youtube" xmlns="http://www.w3.org/2000/svg"><path d="M224.113 303.96L307.387 256l-83.274-47.96zm0 0"/><path d="M256 0C114.637 0 0 114.637 0 256s114.637 256 256 256 256-114.637 256-256S397.363 0 256 0zm159.96 256.262s0 51.918-6.585 76.953c-3.691 13.703-14.496 24.508-28.2 28.195C356.142 368 256 368 256 368s-99.879 0-125.176-6.852c-13.703-3.687-24.508-14.496-28.199-28.199-6.59-24.77-6.59-76.949-6.59-76.949s0-51.914 6.59-76.95c3.688-13.702 14.758-24.773 28.2-28.46C155.858 144 256 144 256 144s100.14 0 125.176 6.852c13.703 3.687 24.508 14.496 28.199 28.199 6.852 25.035 6.586 77.21 6.586 77.21zm0 0"/></svg>
+</a></div>
+          </div>
+  
+  </div>
+
+  </div>
+
+                </div>
+                    </div>
+    </footer>
+
+</div>
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"webform\/session_evaluation","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"en","currentQuery":{"source_entity_id":"48","source_entity_type":"node"}},"pluralDelimiter":"\u0003","ajaxTrustedUrl":{"form_action_p_pvdeGsVG5zNF_XLGPTvYSKCf43t8qZYSwcfZl2uzM":true},"user":{"uid":0,"permissionsHash":"6fd212c3d2ba0c1f474f718a60385b5b79a7568e7fb504717c623b87dcbaa17e"}}</script>
+<script src="../sites/default/files/js/js_QzZwDySxxb1hZOM4echN1JP-pTE92f7xZN_QRsd86tY.js"></script>
+<script src="http://cdn.jsdelivr.net/gh/gjunge/rateit.js@1.1.2/scripts/jquery.rateit.min.js"></script>
+<script src="../sites/default/files/js/js_rW6_pmrWFWLWyqWgZke9Fm4B4RS91Q0YAJbIHWPbPXs.js"></script>
+
+  </body>
+
+<!-- Mirrored from 2019.drupalcampcolorado.org/form/session-evaluation?source_entity_type=node&source_entity_id=48 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2019 13:29:48 GMT -->
+</html>
